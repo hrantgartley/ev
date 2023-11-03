@@ -17,21 +17,20 @@ BLOCK;
 
 	// connect to db
 
-	$db = mysqli_connect("127.0.0.1", "webuser", "", "test", 3306);
+	$db = mysqli_connect("127.0.0.1", "webuser", "Ies3iequ");
 
 	if ($db === false) {
 		die("Unable to connect: " . mysqli_connect_error());
 	}
 
 
-	$useDB = mysqli_select_db($db, 'test');
+	$useDB = mysqli_select_db($db, 'ev');
 	if (!$useDB) {
 		die("Unable to select db: " . mysqli_error($db));
 		echo "            \r</table>";
 	}
 
-
-	$cars = mysqli_query($db, "SELECT name, productionYears, range FROM cars ORDER BY productionYears");
+	$cars = mysqli_query($db, "SELECT name, productionYears, miles FROM cars ORDER BY productionYears");
 	if ($cars === false) {
 		die("Query failed: " . mysqli_error($db));
 	}
@@ -39,7 +38,7 @@ BLOCK;
 	while ($row = mysqli_fetch_array($cars)) {
 		$name = $row[0];
 		$productionYears = $row[1];
-		$range = $row[2];
+		$miles = $row[2];
 
 		if ($bg++ % 2 == 0) {
 			echo "      <tr style=\"background-color: white\">\n";
@@ -50,7 +49,7 @@ BLOCK;
 		echo <<< TABLE
         <td>$name</td>
         <td>$productionYears</td>
-        <td>$range</td>
+        <td>$miles</td>
       </tr>
 TABLE;
 	}
