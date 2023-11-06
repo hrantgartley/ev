@@ -9,7 +9,7 @@ if (isset($_POST['addButton'])) {
 }
 function displayForm() {
 	echo <<< FORM
-	<form action="add.php" method="post"></form>
+	<form action="add.php" method="post">
 	<table>
 	<tr>
 		<th><label for="name">Model: </label></th>
