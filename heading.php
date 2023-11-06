@@ -10,5 +10,4 @@
 	<link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
 	<div class="center">
 		<h1>Electric cars through the ages</h1>
-
 	</div>

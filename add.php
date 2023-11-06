@@ -1,11 +1,12 @@
 <?php
 require('heading.php');
-// if submitted add an ev else display form
+
 require('footing.php');
-if(isset(_$_POST['addButton']))
-	addEV()
-else
+if (isset($_POST['addButton'])) {
+	addEV();
+} else {
 	displayForm();
+}
 function displayForm() {
 	echo <<< FORM
 	<form action="add.php" method="post"></form>
@@ -20,7 +21,6 @@ function displayForm() {
 		<td><input type="text" name="year" id="year" required maxlength="9" placeholder="1970-2000" pattern="/d{4}-$|^\d{4}-\d{4}$" autocomplete="off"></td>
 		<td><input type="text" name="range" id="range" required maxlength="5" placeholder="999" pattern="^\d{1,5}$" autocomplete="off"></td>
 	</tr>
-
 	<tr>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
@@ -30,9 +30,7 @@ function displayForm() {
 	</form>
 
 FORM;
-
 }
 
 function addEV() {
-
 }
