@@ -15,7 +15,8 @@ function displayList() {
       </tr>
 BLOCK;
 
-	$db = mysqli_connect("127.0.0.1", "webuser", "Ies3iequ");
+	require('credentials.php');
+	$db = mysqli_connect($hostname, $username, $password, $database);
 
 	if ($db === false) {
 		die("Unable to connect: " . mysqli_connect_error());

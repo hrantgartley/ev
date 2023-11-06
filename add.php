@@ -14,7 +14,7 @@ function displayForm() {
 	<tr>
 		<th><label for="name">Model: </label></th>
 		<th><label for="year">Years: </label></th>
-		<th><label for="miles">Miles: </label></th>
+		<th><label for="range">Miles: </label></th>
 	</tr>
 	<tr>
 		<td><input type="text" name="name" id="name" required maxlength="64" placeholder="name of EV" autocomplete="off"></td>
@@ -34,7 +34,7 @@ FORM;
 
 function addEV() {
 	$name = $_POST['name'];
-	$years = $_POST['years'];
+	$years = $_POST['year'];
 	$range = $_POST['range'];
 	$name = trim($name);
 	$name = filter_var($name, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "/^[0-9a-zA-Z !-\.]{1,64}$/")));
