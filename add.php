@@ -18,7 +18,7 @@ function displayForm() {
 	</tr>
 	<tr>
 		<td><input type="text" name="name" id="name" required maxlength="64" placeholder="name of EV" autocomplete="off"></td>
-		<td><input type="text" name="year" id="year" required maxlength="9" placeholder="1970-2000" pattern="/d{4}-$|^\d{4}-\d{4}$" autocomplete="off"></td>
+		<td><input type="text" name="year" id="year" required maxlength="9" placeholder="1970-2000" pattern="^\d{4}(-\d{4})?$" autocomplete="off"></td>
 		<td><input type="text" name="range" id="range" required maxlength="5" placeholder="999" pattern="^\d{1,5}$" autocomplete="off"></td>
 	</tr>
 	<tr>
@@ -39,7 +39,7 @@ function addEV() {
 	$name = trim($name);
 	$name = filter_var($name, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "/^[0-9a-zA-Z !-\.]{1,64}$/")));
 	$years = trim($years);
-	$years = filter_var($years, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "/d{4}-$|^\d{4}-\d{4}$")));
+	$years = filter_var($years, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "^\d{4}(-\d{4})?$")));
 	$range = trim($range);
 	$range = filter_var($range, FILTER_VALIDATE_INT, array('options' => array('minval' => "1", "max_val" => "99999")));
 	if ($name != false && $years != false && $range != false) {
