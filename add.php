@@ -64,7 +64,6 @@ SUCCESS;
 			</div>
 FAIL;
 		}
-		mysqli_close($db);
 	} else {
 		die("invalid inputs");
 	}
