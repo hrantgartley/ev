@@ -1,3 +1,6 @@
+<div class="hamburger">
+	<a href="https://www.google.com">&#9776; Menu</a>
+</div>
 <?php
 
 require('heading.php');
