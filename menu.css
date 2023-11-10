@@ -31,5 +31,11 @@ body {
   font-size: 24px;
   cursor: pointer;
   padding: 15px;
-  color: black;
+  background: #333;
+  color: #fff;
+  border: none;
+}
+
+#close-icon {
+  cursor: pointer;
 }
