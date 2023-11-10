@@ -1,11 +1,3 @@
-<div class="menu-btn">&#9776;</div>
-<nav class="menu">
-	<ul>
-		<li><a href="file1.html">File 1</a></li>
-		<li><a href="file2.html">File 2</a></li>
-	</ul>
-</nav>
-<script src="script.js"></script>
 <?php
 
 require('heading.php');
