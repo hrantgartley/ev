@@ -38,4 +38,6 @@ body {
 
 #close-icon {
   cursor: pointer;
+  text-align: right;
+  padding: 1em;
 }

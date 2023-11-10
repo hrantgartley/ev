@@ -3,12 +3,12 @@ require('heading.php');
 
 require('footing.php');
 if (isset($_POST['addButton'])) {
-	addEV();
+    addEV();
 } else {
-	displayForm();
+    displayForm();
 }
 function displayForm() {
-	echo <<< FORM
+    echo <<< FORM
 	<form action="add.php" method="post">
 	<table>
 	<tr>
@@ -33,38 +33,38 @@ FORM;
 }
 
 function addEV() {
-	$name = $_POST['name'];
-	$years = $_POST['year'];
-	$range = $_POST['range'];
-	$name = trim($name);
-	$name = filter_var($name, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "/^[0-9a-zA-Z !-\.]{1,64}$/")));
-	$years = trim($years);
-	$years = filter_var($years, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "^\d{4}(-\d{4})?$")));
-	$range = trim($range);
-	$range = filter_var($range, FILTER_VALIDATE_INT, array('options' => array('minval' => "1", "max_val" => "99999")));
-	if ($name != false && $years != false && $range != false) {
-		require("credentials.php");
-		$db = mysqli_connect($hostname, $username, $password, $database);
+    $name = $_POST['name'];
+    $years = $_POST['year'];
+    $range = $_POST['range'];
+    $name = trim($name);
+    $name = filter_var($name, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "/^[0-9a-zA-Z !-\.]{1,64}$/")));
+    $years = trim($years);
+    $years = filter_var($years, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => "^\d{4}(-\d{4})?$")));
+    $range = trim($range);
+    $range = filter_var($range, FILTER_VALIDATE_INT, array('options' => array('minval' => "1", "max_val" => "99999")));
+    if ($name != false && $years != false && $range != false) {
+        require("credentials.php");
+        $db = mysqli_connect($hostname, $username, $password, $database);
 
-		if (mysqli_connect_errno()) {
-			die("unable to connect to databse" . mysqli_connect_error());
-		}
-		$query = mysqli_prepare($db, "INSERT INTO cars (name, productionYears, miles) VALUES(?,?,?)");
-		mysqli_stmt_bind_param($query, 'sss', $name, $years, $range);
-		if (mysqli_stmt_execute($query)) {
-			echo <<< SUCCESS
+        if (mysqli_connect_errno()) {
+            die("unable to connect to databse" . mysqli_connect_error());
+        }
+        $query = mysqli_prepare($db, "INSERT INTO cars (name, productionYears, miles) VALUES(?,?,?)");
+        mysqli_stmt_bind_param($query, 'sss', $name, $years, $range);
+        if (mysqli_stmt_execute($query)) {
+            echo <<< SUCCESS
 			<div class="center">
 			  <h2> Success! Record added to database. </h2>
 			</div>
 SUCCESS;
-		} else {
-			echo <<< FAIL
+        } else {
+            echo <<< FAIL
 			<div class="center">
 			  <h2> An error occured. Unable to add record </h2>
 			</div>
 FAIL;
-		}
-	} else {
-		die("invalid inputs");
-	}
+        }
+    } else {
+        die("invalid inputs");
+    }
 }
