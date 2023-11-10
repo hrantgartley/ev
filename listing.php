@@ -1,6 +1,11 @@
-<div class="hamburger">
-	<a href="https://www.google.com">&#9776; Menu</a>
-</div>
+<div class="menu-btn">&#9776;</div>
+<nav class="menu">
+	<ul>
+		<li><a href="file1.html">File 1</a></li>
+		<li><a href="file2.html">File 2</a></li>
+	</ul>
+</nav>
+<script src="script.js"></script>
 <?php
 
 require('heading.php');
@@ -10,10 +15,10 @@ require('footing.php');
 function displayList() {
 	$bg = 0;
 	echo <<< BLOCK
-    <table>
+    <table style="margin-left: auto; margin-right: auto; width: 50%">
       <tr>
         <th>Name</th>
-        <th>Prod Years</th>
+        <th>Production Years</th>
         <th>Range</th>
       </tr>
 BLOCK;
