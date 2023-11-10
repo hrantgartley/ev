@@ -43,14 +43,12 @@ function addEV() {
 	$range = trim($range);
 	$range = filter_var($range, FILTER_VALIDATE_INT, array('options' => array('minval' => "1", "max_val" => "99999")));
 	if ($name != false && $years != false && $range != false) {
-		// connect to database
 		require("credentials.php");
 		$db = mysqli_connect($hostname, $username, $password, $database);
 
 		if (mysqli_connect_errno()) {
 			die("unable to connect to databse" . mysqli_connect_error());
 		}
-		// creare query
 		$query = mysqli_prepare($db, "INSERT INTO cars (name, productionYears, miles) VALUES(?,?,?)");
 		mysqli_stmt_bind_param($query, 'sss', $name, $years, $range);
 		if (mysqli_stmt_execute($query)) {
