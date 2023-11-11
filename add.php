@@ -10,14 +10,14 @@ if (isset($_POST['addButton'])) {
 function displayForm() {
 	echo <<< FORM
 	<form action="add.php" method="post">
-	<table>
+	<table style="margin-right: auto; margin-left: auto; width: 50%"; id="addTable">
 	<tr>
 		<th><label for="name">Model: </label></th>
 		<th><label for="year">Years: </label></th>
 		<th><label for="range">Miles: </label></th>
 	</tr>
 	<tr>
-		<td><input type="text" name="name" id="name" required maxlength="64" placeholder="name of EV" autocomplete="off"></td>
+		<td><input type="text" name="name" id="name" required maxlength="64" placeholder="name of EV" autocomplete="off" ></td>
 		<td><input type="text" name="year" id="year" required maxlength="9" placeholder="1970-2000" autocomplete="off"></td>
 		<td><input type="text" name="range" id="range" required maxlength="5" placeholder="999" pattern="^\d{1,5}$" autocomplete="off"></td>
 	</tr>
