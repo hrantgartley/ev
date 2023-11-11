@@ -12,12 +12,12 @@
 	<div class="menu-btn">&#9776;</div>
 	<nav class="menu">
 		<ul>
-			<div id="close-icon" style="text-align: right; padding: .5em;">close &#x2717;</div>
+			<div id="close-icon" style=" padding: .5em;">close &#x2717;</div>
 			<li><a href="file1.html">File 1</a></li>
 			<li><a href="file2.html">File 2</a></li>
 		</ul>
 	</nav>
 	<script src="script.js"></script>
 	<div class="center">
-		<h1>Electric cars through the ages</h1>
+		<h1 style="margin-left: auto; margin-right: auto; width: 50%;">Electric cars through the ages</h1>
 	</div>
