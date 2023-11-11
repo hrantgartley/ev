@@ -8,4 +8,4 @@
 		<li><a href="./update.php">Update</a></li>
 	</ul>
 </nav>
-<script src="script.js"></script>
+<script src="../js/script.js"></script>

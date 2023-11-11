@@ -1,8 +1,11 @@
 <?php
 require('heading.php');
-function updateVehicle() {
-}
 
+function updateVehicle
+{
+	
+}
+}
 if (isset($_POST['updateButton'])) {
 	updateVehicle();
 } else {
