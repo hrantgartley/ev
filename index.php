@@ -9,7 +9,6 @@
 
 <body>
 	<a href="./includes/menu.php">Car Thingy</a>
-	meep
 </body>
 
 </html>
