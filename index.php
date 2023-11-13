@@ -8,7 +8,20 @@
 </head>
 
 <body>
-	<a href="./includes/menu.php">Car Thingy</a>
+	<a href="./includes/menu.php">Car Entry System</a>
+	<style>
+		a {
+			text-align: center;
+			font-size: 28px;
+			padding-left: 25em;
+		}
+
+		body {
+
+			background-image: url(./images/background.webp);
+			max-width: 100%;
+		}
+	</style>
 </body>
 
 </html>
