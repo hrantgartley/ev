@@ -1,7 +1,6 @@
 <?php
 require('heading.php');
 
-require('footing.php');
 if (isset($_POST['addButton'])) {
 	addEV();
 } else {
@@ -69,3 +68,4 @@ FAIL;
 		}
 	}
 }
+require 'footing.php';
