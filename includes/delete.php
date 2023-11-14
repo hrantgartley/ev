@@ -1,66 +1,98 @@
 <?php
-require_once('heading.php');
 
-require_once('footing.php');
+require('heading.php');
 
-if (isset($_POST['deleteButton'])) {
-	deleteVehicle();
-} else {
-	deleteForm();
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_ids'])) {
+	handleDelete();
 }
 
+displayList();
+require('footing.php');
 
-function deleteVehicle() {
-	$name = trim($_POST['name']);
-	$year = trim($_POST['year']);
-	$range = trim($_POST['range']);
-	if ($name != false || $year != false || $range != false) {
-		die("<h1 style=\"text-align: center;\"> INVALID INPUTS </h1>");
-	} else {
-		require("credentials.php");
-		$db = mysqli_connect($hostname, $username, $password, $database);
+function handleDelete() {
+	require('credentials.php');
+	$db = mysqli_connect($hostname, $username, $password, $database);
 
-		if (mysqli_connect_errno()) {
-			die("Error connecting to the database" . mysqli_connect_error());
-		}
-		$query = "DELETE FROM cars (name, productionYears, miles)
-		    VALUES('" . $name . "','" . $year . "','" . $range . "')";
-		if (mysqli_query($db, $query)) {
-			echo <<< SUCCESS
-			<div class="center">
-				<h2>SUCCESS! Record deleted from database</h2>
-			</div>
-SUCCESS;
-		} else {
-			echo <<< FAIL
-			<div class="center">
-				<h2>FAIL ): could not delete record</h2>
-			</div>
-FAIL;
+	if ($db === false) {
+		die("Unable to connect: " . mysqli_connect_error());
+	}
+
+	$useDB = mysqli_select_db($db, 'ev');
+	if (!$useDB) {
+		die("Unable to select db: " . mysqli_error($db));
+	}
+
+	foreach ($_POST['delete_ids'] as $id) {
+		$id = mysqli_real_escape_string($db, $id);
+		$result = mysqli_query($db, "DELETE FROM cars WHERE id = '$id'");
+
+		if ($result === false) {
+			die("Delete query failed: " . mysqli_error($db));
 		}
 	}
+
+	mysqli_close($db);
 }
 
-function deleteForm() {
-	echo <<< DELETETABlE
-	<form action="delete.php" method="post">
-		<table>
-			<tr>
-				<td>Name: </td>
-				<td><input type="text" name="name" /></td>
-			</tr>
-			<tr>
-				<td>Production Years: </td>
-				<td><input type="text" name="year" /></td>
-			</tr>
-			<tr>
-				<td>Miles: </td>
-				<td><input type="text" name="range" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="deleteButton" value="Delete" /></td>
-			</tr>
-		</table>
+function displayList() {
+	$background = 0;
+	echo <<< BLOCK
+    <div style="text-align: center;">
+        <form method="post" action="">
+            <table style="margin-left: auto; margin-right: auto; width: 50%">
+                <tr>
+                    <th>Delete</th>
+                    <th>Name</th>
+                    <th>Production Years</th>
+                    <th>Range</th>
+                </tr>
+BLOCK;
 
-DELETETABlE;
+	require('credentials.php');
+	$db = mysqli_connect($hostname, $username, $password, $database);
+
+	if ($db === false) {
+		die("Unable to connect: " . mysqli_connect_error());
+	}
+
+	$useDB = mysqli_select_db($db, 'ev');
+	if (!$useDB) {
+		die("Unable to select db: " . mysqli_error($db));
+		echo "            \r</table>";
+	}
+
+	$cars = mysqli_query($db, "SELECT id, name, productionYears, miles FROM cars ORDER BY productionYears");
+	if ($cars === false) {
+		die("Query failed: " . mysqli_error($db));
+	}
+
+	while ($row = mysqli_fetch_array($cars)) {
+		$id = $row[0];
+		$name = $row[1];
+		$productionYears = $row[2];
+		$miles = $row[3];
+
+		if ($background++ % 2 == 0) {
+			echo "        <tr style=\"background-color: white\">\n";
+		} else {
+			echo "        <tr style=\"background-color: lightgrey\">\n";
+		}
+
+		echo <<< TABLE
+        <td><input type="checkbox" name="delete_ids[]" value="$id"></td>
+        <td>$name</td>
+        <td>$productionYears</td>
+        <td>$miles</td>
+      </tr>
+TABLE;
+	}
+
+	echo <<< BUTTON
+            </table>
+            <button type="submit" style="margin-right: 43%">Delete Selected</button>
+        </form>
+    </div>
+BUTTON;
+
+	mysqli_close($db);
 }
