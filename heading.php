@@ -9,5 +9,5 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
 	<div class="center">
-		<h1>Electric cars through the ages</h1>
+		<h1 style="padding-left: 5%">Electric cars through the ages</h1>
 	</div>
