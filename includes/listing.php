@@ -5,7 +5,7 @@ displayList();
 require('footing.php');
 
 function displayList() {
-	$bg = 0;
+	$background = 0;
 	echo <<< BLOCK
     <table style="margin-left: auto; margin-right: auto; width: 50%">
       <tr>
@@ -39,7 +39,7 @@ BLOCK;
 		$productionYears = $row[1];
 		$miles = $row[2];
 
-		if ($bg++ % 2 == 0) {
+		if ($background++ % 2 == 0) {
 			echo "        <tr style=\"background-color: white\">\n";
 		} else {
 			echo "        <tr style=\"background-color: lightgrey\">\n";
