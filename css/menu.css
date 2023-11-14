@@ -38,3 +38,10 @@ body {
 #close-icon {
   cursor: pointer;
 }
+
+footer {
+  position: absolute;
+  margin-top: 5em;
+  height: 12vh;
+  padding-top: 15%%;
+}
