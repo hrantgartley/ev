@@ -2,7 +2,6 @@
 <nav class="menu">
 	<ul>
 		<div id="close-icon" style=" padding: .5em;">close &#x2717;</div>
-		<li><a href="../index.php">Home</a></li>
 		<li><a href="./listing.php">Display</a></li>
 		<li><a href="./add.php">Add</a></li>
 		<li><a href="./delete.php">Delete</a></li>
