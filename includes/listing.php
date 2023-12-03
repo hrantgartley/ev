@@ -5,54 +5,54 @@ displayList();
 require('footing.php');
 
 function displayList() {
-	$background = 0;
-	echo <<< BLOCK
+    $background = 0;
+    echo <<< BLOCK
     <table style="margin-left: auto; margin-right: auto; width: 50%">
       <tr>
         <th>Name</th>
-        <th>Production Years</th>
-        <th>Range</th>
+        <th>Email</th>
+        <th>Expiration Date</th>
       </tr>
 BLOCK;
 
-	require('credentials.php');
-	$db = mysqli_connect($hostname, $username, $password, $database);
+    require('credentials.php');
+    $db = mysqli_connect($hostname, $username, $password, $database);
 
-	if ($db === false) {
-		die("Unable to connect: " . mysqli_connect_error());
-		die("Bestest ever evrer");
-	}
+    if ($db === false) {
+        die("Unable to connect: " . mysqli_connect_error());
+    }
 
-	$useDB = mysqli_select_db($db, 'ev');
-	if (!$useDB) {
-		die("Unable to select db: " . mysqli_error($db));
-		echo "            \r</table>";
-	}
+    $useDB = mysqli_select_db($db, $database);
+    if (!$useDB) {
+        die("Unable to select db: " . mysqli_error($db));
+        echo "            \r</table>";
+    }
 
-	$cars = mysqli_query($db, "SELECT name, productionYears, miles FROM cars ORDER BY productionYears");
-	if ($cars === false) {
-		die("Query failed: " . mysqli_error($db));
-	}
+    $members = mysqli_query($db, "SELECT name, email, expires FROM members ORDER BY name");
+    if ($members === false) {
+        die("Query failed: " . mysqli_error($db));
+    }
 
-	while ($row = mysqli_fetch_array($cars)) {
-		$name = $row[0];
-		$productionYears = $row[1];
-		$miles = $row[2];
+    while ($row = mysqli_fetch_array($members)) {
+        $name = $row['name'];
+        $email = $row['email'];
+        $expires = $row['expires'];
 
-		if ($background++ % 2 == 0) {
-			echo "        <tr style=\"background-color: white\">\n";
-		} else {
-			echo "        <tr style=\"background-color: lightgrey\">\n";
-		}
+        if ($background++ % 2 == 0) {
+            echo "        <tr style=\"background-color: white\">\n";
+        } else {
+            echo "        <tr style=\"background-color: lightgrey\">\n";
+        }
 
-		echo <<< TABLE
+        echo <<< TABLE
         <td>$name</td>
-        <td>$productionYears</td>
-        <td>$miles</td>
+        <td>$email</td>
+        <td>$expires</td>
       </tr>
 TABLE;
-	}
+    }
 
-	echo "</table>\n";
-	mysqli_close($db);
+    echo "</table>\n";
+    mysqli_close($db);
 }
+?>

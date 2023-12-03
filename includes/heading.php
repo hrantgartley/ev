@@ -12,7 +12,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
 
 <body>
-	<?php require_once('dropdown.php') ?>
+	<?php require_once('dropdown.php')?>
 	<div class="center">
-		<h1>Electric cars through the ages</h1>
+		<h1>North Alabama Mountain Bikers</h1>
 	</div>

@@ -25,7 +25,7 @@ function handleUpdate() {
 		die("Unable to connect: " . mysqli_connect_error());
 	}
 
-	$useDB = mysqli_select_db($db, 'ev');
+	$useDB = mysqli_select_db($db, 'namb');
 	if (!$useDB) {
 		die("Unable to select db: " . mysqli_error($db));
 	}
@@ -55,12 +55,12 @@ function displaySelectMenu() {
 		die("Unable to connect: " . mysqli_connect_error());
 	}
 
-	$useDB = mysqli_select_db($db, 'ev');
+	$useDB = mysqli_select_db($db, 'namb');
 	if (!$useDB) {
 		die("Unable to select db: " . mysqli_error($db));
 	}
 
-	$cars = mysqli_query($db, "SELECT id, name FROM cars ORDER BY name");
+	$cars = mysqli_query($db, "SELECT ID,name FROM members ORDER BY name");
 	if ($cars === false) {
 		die("Query failed: " . mysqli_error($db));
 	}
@@ -79,8 +79,8 @@ function displaySelectMenu() {
 		<label for="selected_car" style="font-size: 20px"
 			>Select a car to update:</label
 		><br />
-		<select name="selected_car" id="selected_car"></select>
-	</form>
+		<select name="selected_car" id="selected_car">
+	
 BEFOREFORM;
 	while ($row = mysqli_fetch_array($cars)) {
 		$id = $row['id'];
@@ -96,67 +96,41 @@ AFTERFORM;
 	mysqli_close($db);
 }
 
-function displayUpdateForm($selectedCarId) {
-	require('credentials.php');
-	$db = mysqli_connect($hostname, $username, $password, $database);
+function displayForm($cars)
+{
+    echo <<< FORM
+    <form action="update.php" method="post">
+    <table style="margin-right: auto; margin-left: auto; width: 50%" id="updateTable">
+    <tr>
+        <th><label for="car">Select Car: </label></th>
+        <td>
+            <select name="car" id="car" required>
+                <option value="">Select a Car</option>
+FORM;
 
-	if ($db === false) {
-		die("Unable to connect: " . mysqli_connect_error());
-	}
+    // Loop through the cars array to populate the options
+    foreach ($cars as $car) {
+        $name = $car['name'];
+        $productionYears = $car['productionYears'];
+        $miles = $car['miles'];
 
-	$useDB = mysqli_select_db($db, 'ev');
-	if (!$useDB) {
-		die("Unable to select db: " . mysqli_error($db));
-	}
+        echo "<option value=\"$name\">$name - $productionYears - $miles miles</option>";
+    }
 
-	$car = mysqli_query($db, "SELECT name, productionYears, miles FROM cars WHERE id='$selectedCarId'");
-	if ($car === false) {
-		die("Query failed: " . mysqli_error($db));
-	}
-
-	$row = mysqli_fetch_assoc($car);
-	$name = $row['name'];
-	$productionYears = $row['productionYears'];
-	$miles = $row['miles'];
-	echo <<< UPDATEFORM
-    <div class="center" style="padding-left: 25%">
-    <form
-        method="post"
-        action=""
-        style="border: 1px solid #000; padding: 10px; display: inline-block"
-    >
-        <input type="hidden" name="update_id" value="$selectedCarId" />
-        <table style="border: 1px solid #000; border-collapse: collapse">
-            <tr>
-                <th style="border: 1px solid #000">Model</th>
-                <th style="border: 1px solid #000">Years Produced</th>
-                <th style="border: 1px solid #000">Range</th>
-            </tr>
-            <tr>
-                <td style="border: 1px solid #000">
-                    <input type="text" name="name_var" value="$name" />
-                </td>
-                <td style="border: 1px solid #000">
-                    <input
-                        type="text"
-                        name="year_var"
-                        value="$productionYears"
-                    />
-                </td>
-                <td style="border: 1px solid #000">
-                    <input type="text" name="range_var" value="$miles" />
-                </td>
-            </tr>
-        </table>
-        <br />
-        <input
-            type="submit"
-            value="Update EV"
-            style="border: 1px solid #000; margin-left=5em; margin-left: 80%;"
-        />
+    echo <<< FORM
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th><label for="newMiles">New Miles: </label></th>
+        <td><input type="text" name="newMiles" id="newMiles" required maxlength="5" placeholder="New Miles" pattern="^\d{1,5}$" autocomplete="off"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td style="float:right;"> <input type="submit" name="updateButton" value="Update"></td>
+    </tr>
+    </table>
     </form>
-</div>
-UPDATEFORM;
-
-	mysqli_close($db);
+FORM;
 }
+
