@@ -56,13 +56,13 @@ function addEV() {
 			<div class="center">
 			  <h2> Success! Record added to database. </h2>
 			</div>
-SUCCESS;
+			SUCCESS;
 		} else {
 			echo <<< FAIL
 			<div class="center">
 			  <h2> An error occured. Unable to add record </h2>
 			</div>
-FAIL;
+			FAIL;
 		}
 	} else {
 		die("invalid inputs");
