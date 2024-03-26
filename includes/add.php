@@ -10,8 +10,7 @@ if (isset($_POST['addButton'])) {
     displayForm();
 }
 
-function displayForm()
-{
+function displayForm() {
     echo <<< FORM
     <form action="add.php" method="post">
     <table style="margin-right: auto; margin-left: auto; width: 50%" id="addTable">
@@ -35,16 +34,15 @@ function displayForm()
 FORM;
 }
 
-function addMember()
-{
+function addMember() {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $expires = $_POST['expires'];
 
     $name = trim($name);
-    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-    $expires = date('Y-m-d', strtotime($expires)); 
+    $expires = date('Y-m-d', strtotime($expires));
 
     if ($name && $email && $expires) {
         require("credentials.php");
@@ -64,15 +62,14 @@ function addMember()
             <div class="center">
                 <h2>Success! Record added to database.</h2>
             </div>
-SUCCESS;
+            SUCCESS;
         } else {
             echo <<< FAIL
             <div class="center">
                 <h2>An error occurred. Unable to add record.</h2>
             </div>
-FAIL;
+            FAIL;
         }
-
         mysqli_stmt_close($stmt);
         mysqli_close($db);
     } else {
@@ -81,4 +78,3 @@ FAIL;
 }
 
 require 'footing.php';
-?>

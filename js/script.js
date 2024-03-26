@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleMenu = () => {
         menu.style.display = menu.style.display === "block" ? "none" : "block";
     };
-
     menuButton.addEventListener("click", toggleMenu);
     close.addEventListener("click", toggleMenu);
 
